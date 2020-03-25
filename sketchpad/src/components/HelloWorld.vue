@@ -5,7 +5,7 @@
   </b-container>
   <b-container class="controls">
       <b-button-group>
-      <b-button variant="outline-primary" id="drawing-mode">Cancel drawing mode</b-button><br>
+      <b-button variant="outline-primary" id="drawing-mode">Enter Selection Mode</b-button><br>
       <b-button id="clear-canvas">Clear</b-button><br>
       </b-button-group>
 
@@ -27,17 +27,6 @@
 
         <label for="drawing-color">Line color:</label>
         <input type="color" value="#005E7A" id="drawing-color"><br>
-
-        <label for="drawing-shadow-color">Shadow color:</label>
-        <input type="color" value="#005E7A" id="drawing-shadow-color"><br>
-
-        <label for="drawing-shadow-width">Shadow width:</label>
-        <span class="info">0</span>
-        <input type="range" value="0" min="0" max="50" id="drawing-shadow-width"><br>
-
-        <label for="drawing-shadow-offset">Shadow offset:</label>
-        <span class="info">0</span>
-        <input type="range" value="0" min="0" max="50" id="drawing-shadow-offset"><br>
         
       </div>
   </b-container>
@@ -54,18 +43,16 @@ export default {
   },
   mounted() {
     const ref = this.$refs.canvas;
-    const canvas = new fabric.Canvas(ref, {
-    isDrawingMode: true
-    });
+    const canvas = new fabric.Canvas(ref, { isDrawingMode: true });
     fabric.Object.prototype.transparentCorners = false;
 
     var drawingModeEl = document.getElementById('drawing-mode');
     console.log('drawing mode button clicked')
     var drawingOptionsEl = document.getElementById('drawing-mode-options');
     drawingModeEl.onclick = function() {
-      canvas.isDrawingMode = !canvas.isDrawingMode;
-      if (canvas.isDrawingMode) {
-        drawingModeEl.innerHTML = 'Cancel drawing mode';
+      canvas.isDrawingMode = !canvas.isDrawingMode; // deactivate drawing mode
+      if (canvas.isDrawingMode == true) {
+        drawingModeEl.innerHTML = 'Enter Selection Mode';
         drawingOptionsEl.style.display = 'block';
       }
       else {
