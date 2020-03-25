@@ -44,6 +44,7 @@ export default {
   mounted() {
     const ref = this.$refs.canvas;
     const canvas = new fabric.Canvas(ref, { isDrawingMode: true });
+
     fabric.Object.prototype.transparentCorners = false;
 
     var drawingModeEl = document.getElementById('drawing-mode');
@@ -68,12 +69,16 @@ export default {
   var drawingModeSelectionEl = document.getElementById('drawing-mode-selector');
   var drawingColorEl = document.getElementById('drawing-color');
 
+  drawingColorEl.onchange = function() {
+    canvas.freeDrawingBrush.color = this.value;
+  };
+
   drawingModeSelectionEl.onclick = function() { 
     console.log("Value:" + drawingModeSelectionEl.value);
     if (drawingModeSelectionEl.value == 'scribbles') {
       console.log("Scribbles");
-
       canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush.color = drawingColorEl.value;
     }
     if (drawingModeSelectionEl.value == 'line') {
       console.log("Straight Line");
