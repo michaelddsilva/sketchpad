@@ -5,21 +5,21 @@
   </b-container>
   <b-container class="controls">
       <b-button-group>
-      <b-button variant="outline-primary" id="drawing-mode">Enter Selection Mode</b-button><br>
+      <b-button variant="outline-primary" id="drawing-mode">Exit drawing mode</b-button><br>
       <b-button id="clear-canvas">Clear</b-button><br>
       </b-button-group>
 
       <div id="drawing-mode-options">
         <h2>Drawing Mode Options</h2>
         <label for="drawing-mode-selector">Mode:</label>
-        <b-form-select size="sm" id="drawing-mode-selector">
-          <option>Scribbles</option>
-          <option>Straight Lines</option>
-          <option>Rectangles</option>
-          <option>Elipses</option>
-          <option>Special Shapes</option>
-          <option>Polygons</option>
-        </b-form-select><br>
+        <select size="sm" id="drawing-mode-selector">
+          <option value="scribbles" selected>Scribbles</option>
+          <option value="line">Straight Lines</option>
+          <option value="rectangle">Rectangles</option>
+          <option value="elipses">Elipses</option>
+          <option value="special">Special Shapes</option>
+          <option value="polygon">Polygons</option>
+        </select><br>
 
         <label for="drawing-line-width">Line width:</label>
         <span class="info">30</span>
@@ -52,7 +52,7 @@ export default {
     drawingModeEl.onclick = function() {
       canvas.isDrawingMode = !canvas.isDrawingMode; // deactivate drawing mode
       if (canvas.isDrawingMode == true) {
-        drawingModeEl.innerHTML = 'Enter Selection Mode';
+        drawingModeEl.innerHTML = 'Exit drawing mode';
         drawingOptionsEl.style.display = 'block';
       }
       else {
@@ -65,6 +65,50 @@ export default {
 
   clearEl.onclick = function() { canvas.clear() };
 
+  var drawingModeSelectionEl = document.getElementById('drawing-mode-selector');
+  var drawingColorEl = document.getElementById('drawing-color');
+
+  drawingModeSelectionEl.onclick = function() { 
+    console.log("Value:" + drawingModeSelectionEl.value);
+    if (drawingModeSelectionEl.value == 'scribbles') {
+      console.log("Scribbles");
+
+      canvas.isDrawingMode = true;
+    }
+    if (drawingModeSelectionEl.value == 'line') {
+      console.log("Straight Line");
+      canvas.isDrawingMode = false;
+      var isDown;
+      var line;
+      canvas.on('mouse:down', function(o){
+        isDown = true;
+        var pointer = canvas.getPointer(o.e);
+        var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
+        
+          line = new fabric.Line(points, {
+          strokeWidth: 6,
+          fill: drawingColorEl.value,
+          stroke: drawingColorEl.value,
+          originX: 'center',
+          originY: 'center',
+
+          });
+        if (drawingModeSelectionEl.value == 'line')  canvas.add(line);
+      });
+    
+      canvas.on('mouse:move', function(o){
+        if (!isDown) return;
+        var pointer = canvas.getPointer(o.e);
+        
+        line.set({ x2: pointer.x, y2: pointer.y });
+        if (drawingModeSelectionEl.value == 'line') canvas.renderAll(); 
+      });
+
+      canvas.on('mouse:up', function(){
+        isDown = false;
+      });
+    }
+  }
   }
 }
 </script>
