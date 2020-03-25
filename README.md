@@ -1,7 +1,7 @@
 # mdsilva6-se3353-sketchpad
 
 ## Software Engineering for Human-Computer Interface Design 
-## Simple SketchPad Drawing Project:  Online Assignment 
+### Simple SketchPad Drawing Project:  Online Assignment 
 
 The following itemized requirements are an informal representation of a set of assignments that comprises the design of a simple sketch drawing program (along with an implementation that can be targeted to any platform of the students` choice). 
 
