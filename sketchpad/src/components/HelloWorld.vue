@@ -93,13 +93,15 @@ export default {
     var drawingModeEl = document.getElementById('drawing-mode');
     console.log('drawing mode button clicked')
     var drawingOptionsEl = document.getElementById('drawing-mode-options');
+    var drawingModeState = true;
     drawingModeEl.onclick = function() {
-      canvas.isDrawingMode = !canvas.isDrawingMode; // deactivate drawing mode
-      if (canvas.isDrawingMode == true) {
+      drawingModeState = !drawingModeState; // deactivate drawing mode
+      if (drawingModeState == true) {
         drawingModeEl.innerHTML = 'Exit drawing mode';
         drawingOptionsEl.style.display = 'block';
       }
       else {
+        canvas.isDrawingMode = false;
         drawingModeEl.innerHTML = 'Enter drawing mode';
         drawingOptionsEl.style.display = 'none';
       }
