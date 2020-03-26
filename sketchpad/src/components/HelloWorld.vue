@@ -18,8 +18,8 @@
           label-cols-sm="3"
           label= "Mode:"
           label-for="drawing-mode-selector">
-        <b-form-select v-model="selected" id="drawing-mode-selector" class="w-50">
-            <b-form-select-option :value="scribbles">Scribbles</b-form-select-option>
+        <b-form-select v-model="selected" id="drawing-mode-selector" class="mb-3">
+            <b-form-select-option value="scribbles">Scribbles</b-form-select-option>
             <b-form-select-option value="line">Straight Lines</b-form-select-option>
             <b-form-select-option value="rectangle">Rectangles</b-form-select-option>
             <b-form-select-option value="elipses">Elipses</b-form-select-option>
@@ -56,11 +56,11 @@ export default {
   },
   mounted() {
     const ref = this.$refs.canvas;
-    const canvas = new fabric.Canvas(ref, { isDrawingMode: true });
+    const canvas = new fabric.Canvas(ref, { isDrawingMode: false });
 
     let scribbles = function() {
       if (drawingModeState == true) {
-        console.log("Scribbles");
+        console.log(drawingModeState + "Scribbles");
         canvas.isDrawingMode = true;
         canvas.freeDrawingBrush.color = drawingColorEl.value;
       }
@@ -68,7 +68,7 @@ export default {
 
     let line = function() {
       if (drawingModeState == true) {
-        console.log("Straight Line");
+        console.log(drawingModeState + "Straight Line");
         canvas.isDrawingMode = false;
         var isMouseDown;
         var line;
@@ -85,7 +85,7 @@ export default {
             originY: 'center',
 
             });
-          if (drawingModeSelectionEl.value == 'line')  canvas.add(line);
+          if (drawingModeSelectionEl.value == 'line' && drawingModeState)  canvas.add(line);
         });
       
         canvas.on('mouse:move', function(o){
@@ -93,7 +93,7 @@ export default {
           var pointer = canvas.getPointer(o.e);
           
           line.set({ x2: pointer.x, y2: pointer.y });
-          if (drawingModeSelectionEl.value == 'line') canvas.renderAll(); 
+          if (drawingModeSelectionEl.value == 'line' && drawingModeState) canvas.renderAll(); 
         });
 
         canvas.on('mouse:up', function(){
@@ -108,9 +108,8 @@ export default {
     var drawingOptionsEl = document.getElementById('drawing-mode-options');
     var drawingModeState = true;
     drawingModeEl.onclick = function() {
-      console.log('drawing mode button clicked')
       drawingModeState = !drawingModeState; // deactivate drawing mode
-      console.log('drawingModeState:' + drawingModeState + drawingModeSelectionEl.value);
+      console.log('drawingModeState:' + drawingModeState + 'Mode: ' + drawingModeSelectionEl.value);
       if (drawingModeState == true) {
         drawingModeEl.innerHTML = 'Exit drawing mode';
         drawingOptionsEl.style.display = 'block';
@@ -172,7 +171,6 @@ export default {
   }
 
   drawingModeSelectionEl.onclick = function() { 
-    console.log("Value:" + drawingModeSelectionEl.value);
     if (drawingModeSelectionEl.value == 'scribbles') {
       scribbles();
     }
