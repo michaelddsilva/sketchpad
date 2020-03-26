@@ -7,6 +7,8 @@
       <b-button-group>
       <b-button variant="outline-primary" id="drawing-mode">Exit drawing mode</b-button><br>
       <b-button id="clear-canvas">Clear</b-button><br>
+      <b-button id="copy-btn">Copy</b-button>
+      <b-button id="paste-btn">Paste</b-button>
       </b-button-group>
 
       <div id="drawing-mode-options">
@@ -72,6 +74,32 @@ export default {
   drawingColorEl.onchange = function() {
     canvas.freeDrawingBrush.color = this.value;
   };
+
+  var clipboard = null;
+
+
+  var copy = document.getElementById("copy-btn");
+  var paste = document.getElementById("paste-btn");
+
+  copy.onclick = function() {
+    canvas.getActiveObject().clone(function(cloned) {
+      clipboard = cloned;
+    });
+  }
+
+  paste.onclick = function() {
+    clipboard.clone(function(clonedObject){
+      canvas.discardActiveObject();
+      clonedObject.set({
+        left: 0,
+        top: 0,
+        evented: true,
+      });
+		canvas.add(clonedObject);
+		canvas.setActiveObject(clonedObject);
+		canvas.requestRenderAll();
+	});
+  }
 
   drawingModeSelectionEl.onclick = function() { 
     console.log("Value:" + drawingModeSelectionEl.value);
