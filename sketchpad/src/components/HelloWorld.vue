@@ -14,9 +14,11 @@
       <br><br>
       <div id="drawing-mode-options">
         <h2>Drawing Mode Options</h2>
-        <label-cols for="drawing-mode-selector">Mode:</label-cols>
-        <b-form-select v-model="selected"
-          id="drawing-mode-selector">
+        <b-form-group
+          label-cols-sm="3"
+          label= "Mode:"
+          label-for="drawing-mode-selector">
+        <b-form-select v-model="selected" id="drawing-mode-selector" class="w-50">
             <b-form-select-option :value="scribbles">Scribbles</b-form-select-option>
             <b-form-select-option value="line">Straight Lines</b-form-select-option>
             <b-form-select-option value="rectangle">Rectangles</b-form-select-option>
@@ -24,6 +26,7 @@
             <b-form-select-option value="special">Special Shapes</b-form-select-option>
             <b-form-select-option value="polygon">Polygons</b-form-select-option>
         </b-form-select>
+        </b-form-group>
         <b-form-group
           id="drawing-line-width-label"
           label-cols-sm="3"
