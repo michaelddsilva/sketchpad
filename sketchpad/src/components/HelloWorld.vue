@@ -11,26 +11,33 @@
       <b-button id="copy-btn">Copy</b-button>
       <b-button id="paste-btn">Paste</b-button>
       </b-button-group>
-
+      <br><br>
       <div id="drawing-mode-options">
         <h2>Drawing Mode Options</h2>
-        <label for="drawing-mode-selector">Mode:</label>
-        <select size="sm" id="drawing-mode-selector">
-          <option value="scribbles" selected>Scribbles</option>
-          <option value="line">Straight Lines</option>
-          <option value="rectangle">Rectangles</option>
-          <option value="elipses">Elipses</option>
-          <option value="special">Special Shapes</option>
-          <option value="polygon">Polygons</option>
-        </select><br>
-
-        <label for="drawing-line-width">Line width:</label>
-        <span class="info">30</span>
-        <input type="range" value="30" min="0" max="150" id="drawing-line-width"><br>
-
-        <label for="drawing-color">Line color:</label>
-        <input type="color" value="#000000" id="drawing-color"><br>
-        
+        <label-cols for="drawing-mode-selector">Mode:</label-cols>
+        <b-form-select v-model="selected"
+          id="drawing-mode-selector">
+            <b-form-select-option :value="scribbles">Scribbles</b-form-select-option>
+            <b-form-select-option value="line">Straight Lines</b-form-select-option>
+            <b-form-select-option value="rectangle">Rectangles</b-form-select-option>
+            <b-form-select-option value="elipses">Elipses</b-form-select-option>
+            <b-form-select-option value="special">Special Shapes</b-form-select-option>
+            <b-form-select-option value="polygon">Polygons</b-form-select-option>
+        </b-form-select>
+        <b-form-group
+          id="drawing-line-width-label"
+          label-cols-sm="3"
+          label="Line width:"
+          label-for="drawing-line-width">
+          <b-form-input type="range" value="30" min="0" max="150" id="drawing-line-width"></b-form-input>
+        </b-form-group>
+        <b-form-group
+          id="drawing-color-label"
+          label-cols-sm="5"
+          label="Drawing Color:"
+          label-for="drawing-color">
+          <b-form-input type="color" value="#000000" id="drawing-color"></b-form-input>
+        </b-form-group>       
       </div>
   </b-container>
   </div>
@@ -187,6 +194,7 @@ export default {
 .controls {
   width: 30%;
   display: inline-block;
+  background: white;
 }
 
 canvas {
