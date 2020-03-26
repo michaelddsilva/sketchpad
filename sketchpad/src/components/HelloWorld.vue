@@ -7,6 +7,7 @@
       <b-button-group>
       <b-button variant="outline-primary" id="drawing-mode">Exit drawing mode</b-button><br>
       <b-button id="clear-canvas">Clear</b-button><br>
+      <b-button id="cut-btn">Cut</b-button>
       <b-button id="copy-btn">Copy</b-button>
       <b-button id="paste-btn">Paste</b-button>
       </b-button-group>
@@ -78,8 +79,16 @@ export default {
   var clipboard = null;
 
 
+  var cut = document.getElementById("cut-btn");
   var copy = document.getElementById("copy-btn");
   var paste = document.getElementById("paste-btn");
+
+  cut.onclick = function() {
+    canvas.getActiveObject().clone(function(cloned) {
+      clipboard = cloned;
+    });
+    canvas.remove(canvas.getActiveObject());
+  }
 
   copy.onclick = function() {
     canvas.getActiveObject().clone(function(cloned) {
