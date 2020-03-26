@@ -49,30 +49,34 @@ export default {
     const canvas = new fabric.Canvas(ref, { isDrawingMode: true });
 
     let scribbles = function() {
-      console.log("Scribbles");
-      canvas.isDrawingMode = true;
-      canvas.freeDrawingBrush.color = drawingColorEl.value;
+      if (drawingModeState == true) {
+        console.log("Scribbles");
+        canvas.isDrawingMode = true;
+        canvas.freeDrawingBrush.color = drawingColorEl.value;
+      }
     }
 
     let line = function() {
-      console.log("Straight Line");
-      canvas.isDrawingMode = false;
-      var isMouseDown;
-      var line;
-      canvas.on('mouse:down', function(o){
-        isMouseDown = true;
-        var pointer = canvas.getPointer(o.e);
-        var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
-        
-          line = new fabric.Line(points, {
-          strokeWidth: 6,
-          fill: drawingColorEl.value,
-          stroke: drawingColorEl.value,
-          originX: 'center',
-          originY: 'center',
+      if (drawingModeState == true) {
+        console.log("Straight Line");
+        canvas.isDrawingMode = false;
+        var isMouseDown;
+        var line;
+        canvas.on('mouse:down', function(o){
+          isMouseDown = true;
+          var pointer = canvas.getPointer(o.e);
+          var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
+          
+            line = new fabric.Line(points, {
+            strokeWidth: 6,
+            fill: drawingColorEl.value,
+            stroke: drawingColorEl.value,
+            originX: 'center',
+            originY: 'center',
 
-          });
-        if (drawingModeSelectionEl.value == 'line')  canvas.add(line);
+            });
+          if (drawingModeSelectionEl.value == 'line')  canvas.add(line);
+        }
       });
     
       canvas.on('mouse:move', function(o){
