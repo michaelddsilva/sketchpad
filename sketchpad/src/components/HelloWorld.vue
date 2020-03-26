@@ -48,6 +48,46 @@ export default {
     const ref = this.$refs.canvas;
     const canvas = new fabric.Canvas(ref, { isDrawingMode: true });
 
+    let scribbles = function() {
+      console.log("Scribbles");
+      canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush.color = drawingColorEl.value;
+    }
+
+    let line = function() {
+      console.log("Straight Line");
+      canvas.isDrawingMode = false;
+      var isMouseDown;
+      var line;
+      canvas.on('mouse:down', function(o){
+        isMouseDown = true;
+        var pointer = canvas.getPointer(o.e);
+        var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
+        
+          line = new fabric.Line(points, {
+          strokeWidth: 6,
+          fill: drawingColorEl.value,
+          stroke: drawingColorEl.value,
+          originX: 'center',
+          originY: 'center',
+
+          });
+        if (drawingModeSelectionEl.value == 'line')  canvas.add(line);
+      });
+    
+      canvas.on('mouse:move', function(o){
+        if (!isMouseDown) return;
+        var pointer = canvas.getPointer(o.e);
+        
+        line.set({ x2: pointer.x, y2: pointer.y });
+        if (drawingModeSelectionEl.value == 'line') canvas.renderAll(); 
+      });
+
+      canvas.on('mouse:up', function(){
+        isMouseDown = false;
+      });
+    }
+
     fabric.Object.prototype.transparentCorners = false;
 
     var drawingModeEl = document.getElementById('drawing-mode');
@@ -113,46 +153,15 @@ export default {
   drawingModeSelectionEl.onclick = function() { 
     console.log("Value:" + drawingModeSelectionEl.value);
     if (drawingModeSelectionEl.value == 'scribbles') {
-      console.log("Scribbles");
-      canvas.isDrawingMode = true;
-      canvas.freeDrawingBrush.color = drawingColorEl.value;
+      scribbles();
     }
     if (drawingModeSelectionEl.value == 'line') {
-      console.log("Straight Line");
-      canvas.isDrawingMode = false;
-      var isDown;
-      var line;
-      canvas.on('mouse:down', function(o){
-        isDown = true;
-        var pointer = canvas.getPointer(o.e);
-        var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
-        
-          line = new fabric.Line(points, {
-          strokeWidth: 6,
-          fill: drawingColorEl.value,
-          stroke: drawingColorEl.value,
-          originX: 'center',
-          originY: 'center',
-
-          });
-        if (drawingModeSelectionEl.value == 'line')  canvas.add(line);
-      });
-    
-      canvas.on('mouse:move', function(o){
-        if (!isDown) return;
-        var pointer = canvas.getPointer(o.e);
-        
-        line.set({ x2: pointer.x, y2: pointer.y });
-        if (drawingModeSelectionEl.value == 'line') canvas.renderAll(); 
-      });
-
-      canvas.on('mouse:up', function(){
-        isDown = false;
-      });
+      line();
     }
   }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
