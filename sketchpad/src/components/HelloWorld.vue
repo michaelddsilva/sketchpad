@@ -188,6 +188,7 @@ export default {
 
 .sketchpad {
   border-style: none;
+  min-width: 500px;
   width: 50%;
   display: inline-block;
 }
