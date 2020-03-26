@@ -29,7 +29,7 @@
         <input type="range" value="30" min="0" max="150" id="drawing-line-width"><br>
 
         <label for="drawing-color">Line color:</label>
-        <input type="color" value="#005E7A" id="drawing-color"><br>
+        <input type="color" value="#000000" id="drawing-color"><br>
         
       </div>
   </b-container>
@@ -95,14 +95,19 @@ export default {
     fabric.Object.prototype.transparentCorners = false;
 
     var drawingModeEl = document.getElementById('drawing-mode');
-    console.log('drawing mode button clicked')
     var drawingOptionsEl = document.getElementById('drawing-mode-options');
     var drawingModeState = true;
     drawingModeEl.onclick = function() {
+      console.log('drawing mode button clicked')
       drawingModeState = !drawingModeState; // deactivate drawing mode
+      console.log('drawingModeState:' + drawingModeState + drawingModeSelectionEl.value);
       if (drawingModeState == true) {
         drawingModeEl.innerHTML = 'Exit drawing mode';
         drawingOptionsEl.style.display = 'block';
+        if (drawingModeSelectionEl.value == "scribbles") {
+          canvas.isDrawingMode = true;
+          canvas.freeDrawingBrush.color = drawingColorEl.value;
+        }
       }
       else {
         canvas.isDrawingMode = false;
