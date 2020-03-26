@@ -76,20 +76,20 @@ export default {
 
             });
           if (drawingModeSelectionEl.value == 'line')  canvas.add(line);
-        }
-      });
-    
-      canvas.on('mouse:move', function(o){
-        if (!isMouseDown) return;
-        var pointer = canvas.getPointer(o.e);
-        
-        line.set({ x2: pointer.x, y2: pointer.y });
-        if (drawingModeSelectionEl.value == 'line') canvas.renderAll(); 
-      });
+        });
+      
+        canvas.on('mouse:move', function(o){
+          if (!isMouseDown) return;
+          var pointer = canvas.getPointer(o.e);
+          
+          line.set({ x2: pointer.x, y2: pointer.y });
+          if (drawingModeSelectionEl.value == 'line') canvas.renderAll(); 
+        });
 
-      canvas.on('mouse:up', function(){
-        isMouseDown = false;
-      });
+        canvas.on('mouse:up', function(){
+          isMouseDown = false;
+        });
+      }
     }
 
     fabric.Object.prototype.transparentCorners = false;
