@@ -138,6 +138,60 @@ export default {
       }
     }
 
+    let square = function() {
+      if (drawingModeState == true) {
+        console.log(drawingModeState + "Square" + ";" +drawingModeSelectionEl.value);
+        canvas.isDrawingMode = false;
+        var isMouseDown;
+        var square;
+        var x1, y1;
+        canvas.on('mouse:down', function(o){
+          isMouseDown = true;
+          var pointer = canvas.getPointer(o.e);
+          x1 = pointer.x;
+          y1 = pointer.y;
+          
+          square = new fabric.Rect({
+            strokeWidth: 6,
+            fill: 'transparent',
+            stroke: drawingColorEl.value,
+            left: x1,
+            top: y1,
+          });
+          if (drawingModeSelectionEl.value == 'square' && drawingModeState)  canvas.add(square);
+        });
+      
+        canvas.on('mouse:move', function(o){
+          if (!isMouseDown) return;
+          var pointer = canvas.getPointer(o.e);
+          let x2 = pointer.x;
+          let y2 = pointer.y;
+
+          var dim;
+
+           if (Math.max(Math.abs(x2-x1), Math.abs(y2-y1)) == (Math.abs(x2-x1))){
+             dim = x2-x1;
+           } 
+           else {
+             dim = y2-y1
+           }
+          
+          square.set({ 
+            left: x1,
+            top: y1,
+            width: dim,
+            height: dim
+          });
+               
+          if (drawingModeSelectionEl.value == 'square' && drawingModeState) canvas.renderAll(); 
+        });
+
+        canvas.on('mouse:up', function(){
+          isMouseDown = false;
+        });
+      }
+    }
+
     let circle = function() {
       if (drawingModeState == true) {
         console.log(drawingModeState + "Circle" + ";" +drawingModeSelectionEl.value);
@@ -379,6 +433,9 @@ export default {
     }
     else if (drawingModeSelectionEl.value == 'ellipse') {
       ellipse();
+    }
+    else if (drawingModeSelectionEl.value == 'square') {
+      square();
     }
     else if (drawingModeSelectionEl.value == 'circle') {
       circle();
