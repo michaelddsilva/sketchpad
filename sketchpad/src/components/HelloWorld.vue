@@ -27,15 +27,7 @@
             <b-form-select-option value="polygon">Polygons</b-form-select-option>
         </b-form-select>
         </b-form-group>
-        <b-form-group
-          id="drawing-line-width-label"
-          label-cols-sm="3"
-          label="Line width:"
-          label-for="drawing-line-width">
-          <b-form-input type="range" value="30" min="0" max="150" id="drawing-line-width"></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="drawing-color-label"
+        <b-form-group id="drawing-color-label"
           label-cols-sm="5"
           label="Drawing Color:"
           label-for="drawing-color">
@@ -94,6 +86,52 @@ export default {
           
           line.set({ x2: pointer.x, y2: pointer.y });
           if (drawingModeSelectionEl.value == 'line' && drawingModeState) canvas.renderAll(); 
+        });
+
+        canvas.on('mouse:up', function(){
+          isMouseDown = false;
+        });
+      }
+    }
+
+    let rectangle = function() {
+      if (drawingModeState == true) {
+        console.log(drawingModeState + "Rectangle" + ";" +drawingModeSelectionEl.value);
+        canvas.isDrawingMode = false;
+        var isMouseDown;
+        var rectangle;
+        var x1, y1;
+        canvas.on('mouse:down', function(o){
+          isMouseDown = true;
+          var pointer = canvas.getPointer(o.e);
+          var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
+          x1 = pointer.x;
+          y1 = pointer.y;
+          
+          rectangle = new fabric.Rect(points, {
+            strokeWidth: 6,
+            fill: drawingColorEl.value,
+            stroke: drawingColorEl.value,
+            left: x1,
+            top: y1,
+          });
+          if (drawingModeSelectionEl.value == 'rectangle' && drawingModeState)  canvas.add(rectangle);
+        });
+      
+        canvas.on('mouse:move', function(o){
+          if (!isMouseDown) return;
+          var pointer = canvas.getPointer(o.e);
+          let x2 = pointer.x;
+          let y2 = pointer.y;
+          
+          rectangle.set({ 
+            left: x1,
+            top: y1,
+            width: x2 - x1,
+            height: y2 - y1
+          });
+               
+          if (drawingModeSelectionEl.value == 'rectangle' && drawingModeState) canvas.renderAll(); 
         });
 
         canvas.on('mouse:up', function(){
@@ -174,8 +212,11 @@ export default {
     if (drawingModeSelectionEl.value == 'scribbles') {
       scribbles();
     }
-    if (drawingModeSelectionEl.value == 'line') {
+    else if (drawingModeSelectionEl.value == 'line') {
       line();
+    }
+    else if (drawingModeSelectionEl.value == 'rectangle') {
+      rectangle();
     }
   }
   }

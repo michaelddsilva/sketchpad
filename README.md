@@ -36,3 +36,48 @@ The following itemized requirements are an informal representation of a set of a
 - Object diagram representing the Software Architecture and any Design Patterns 
 - The source code and deployment specific files 
 - Be prepared to demo; showing the functionality (and overviewing the prev 3 artifacts )
+
+
+cd sketchpad
+
+npm run build
+
+cd dist
+
+### For mdsilva6
+
+git init
+
+git add .
+
+git commit -m "Update"
+
+git remote add origin-sketchpad https://github.com/mdsilva6/mdsilva6-se3353-sketchpad.git
+
+git push -u origin-sketchpad master --force
+
+cd ..
+
+
+### For michaelddsilva
+
+npm run build
+
+cd dist
+
+git init
+
+git add .
+
+git commit -m "Update"
+
+git remote add origin-sketchpad2 https://github.com/michaelddsilva/sketchpad.git
+
+git push -u origin-sketchpad2 master --force
+
+cd ..
+
+
+
+
+https://github.com/michaelddsilva/sketchpad.git
