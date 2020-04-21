@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <HelloWorld/>
+    <Sketchpad/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Sketchpad from './components/Sketchpad.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Sketchpad
   }
 }
 </script>

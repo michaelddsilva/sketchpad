@@ -38,13 +38,15 @@ The following itemized requirements are an informal representation of a set of a
 - Be prepared to demo; showing the functionality (and overviewing the prev 3 artifacts )
 
 
+# For Pushing Latest Dist 
+
+### For mdsilva6
+
 cd sketchpad
 
 npm run build
 
 cd dist
-
-### For mdsilva6
 
 git init
 
