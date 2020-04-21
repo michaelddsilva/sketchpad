@@ -104,13 +104,12 @@ export default {
         canvas.on('mouse:down', function(o){
           isMouseDown = true;
           var pointer = canvas.getPointer(o.e);
-          var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
           x1 = pointer.x;
           y1 = pointer.y;
           
-          rectangle = new fabric.Rect(points, {
+          rectangle = new fabric.Rect({
             strokeWidth: 6,
-            fill: drawingColorEl.value,
+            fill: 'transparent',
             stroke: drawingColorEl.value,
             left: x1,
             top: y1,
