@@ -376,74 +376,74 @@ export default {
       }
     };
 
-  var clearEl = document.getElementById('clear-canvas');
+    var clearEl = document.getElementById('clear-canvas');
 
-  clearEl.onclick = function() { canvas.clear() };
+    clearEl.onclick = function() { canvas.clear() };
 
-  var drawingModeSelectionEl = document.getElementById('drawing-mode-selector');
-  var drawingColorEl = document.getElementById('drawing-color');
+    var drawingModeSelectionEl = document.getElementById('drawing-mode-selector');
+    var drawingColorEl = document.getElementById('drawing-color');
 
-  drawingColorEl.onchange = function() {
-    canvas.freeDrawingBrush.color = this.value;
-  };
+    drawingColorEl.onchange = function() {
+      canvas.freeDrawingBrush.color = this.value;
+    };
 
-  var clipboard = null;
+    var clipboard = null;
 
 
-  var cut = document.getElementById("cut-btn");
-  var copy = document.getElementById("copy-btn");
-  var paste = document.getElementById("paste-btn");
+    var cut = document.getElementById("cut-btn");
+    var copy = document.getElementById("copy-btn");
+    var paste = document.getElementById("paste-btn");
 
-  cut.onclick = function() {
-    canvas.getActiveObject().clone(function(cloned) {
-      clipboard = cloned;
-    });
-    canvas.remove(canvas.getActiveObject());
-  }
-
-  copy.onclick = function() {
-    canvas.getActiveObject().clone(function(cloned) {
-      clipboard = cloned;
-    });
-  }
-
-  paste.onclick = function() {
-    clipboard.clone(function(clonedObject){
-      canvas.discardActiveObject();
-      clonedObject.set({
-        left: 0,
-        top: 0,
-        evented: true,
+    cut.onclick = function() {
+      canvas.getActiveObject().clone(function(cloned) {
+        clipboard = cloned;
       });
-		canvas.add(clonedObject);
-		canvas.setActiveObject(clonedObject);
-		canvas.requestRenderAll();
-	});
-  }
+      canvas.remove(canvas.getActiveObject());
+    }
 
-  drawingModeSelectionEl.onclick = function() { 
-    if (drawingModeSelectionEl.value == 'scribbles') {
-      scribbles();
+    copy.onclick = function() {
+      canvas.getActiveObject().clone(function(cloned) {
+        clipboard = cloned;
+      });
     }
-    else if (drawingModeSelectionEl.value == 'line') {
-      line();
+
+    paste.onclick = function() {
+      clipboard.clone(function(clonedObject){
+        canvas.discardActiveObject();
+        clonedObject.set({
+          left: 0,
+          top: 0,
+          evented: true,
+        });
+      canvas.add(clonedObject);
+      canvas.setActiveObject(clonedObject);
+      canvas.requestRenderAll();
+    });
     }
-    else if (drawingModeSelectionEl.value == 'rectangle') {
-      rectangle();
+
+    drawingModeSelectionEl.onclick = function() { 
+      if (drawingModeSelectionEl.value == 'scribbles') {
+        scribbles();
+      }
+      else if (drawingModeSelectionEl.value == 'line') {
+        line();
+      }
+      else if (drawingModeSelectionEl.value == 'rectangle') {
+        rectangle();
+      }
+      else if (drawingModeSelectionEl.value == 'ellipse') {
+        ellipse();
+      }
+      else if (drawingModeSelectionEl.value == 'square') {
+        square();
+      }
+      else if (drawingModeSelectionEl.value == 'circle') {
+        circle();
+      }
+      else if (drawingModeSelectionEl.value == 'polygon') {
+        polygon();
+      }
     }
-    else if (drawingModeSelectionEl.value == 'ellipse') {
-      ellipse();
-    }
-    else if (drawingModeSelectionEl.value == 'square') {
-      square();
-    }
-    else if (drawingModeSelectionEl.value == 'circle') {
-      circle();
-    }
-    else if (drawingModeSelectionEl.value == 'polygon') {
-      polygon();
-    }
-  }
   }
 }
 
