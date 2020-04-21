@@ -43,9 +43,7 @@ import { fabric } from 'fabric'
 
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
+  props: {  },
   mounted() {
     const ref = this.$refs.canvas;
     const canvas = new fabric.Canvas(ref, { isDrawingMode: false });
