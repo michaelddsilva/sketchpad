@@ -138,6 +138,68 @@ export default {
       }
     }
 
+    let circle = function() {
+      if (drawingModeState == true) {
+        console.log(drawingModeState + "Circle" + ";" +drawingModeSelectionEl.value);
+        canvas.isDrawingMode = false;
+        var isMouseDown;
+        var circle;
+        var x1, y1;
+        canvas.on('mouse:down', function(o){
+          isMouseDown = true;
+          var pointer = canvas.getPointer(o.e);
+          x1 = pointer.x;
+          y1 = pointer.y;
+          
+          circle = new fabric.Circle({
+            strokeWidth: 6,
+            fill: 'transparent',
+            stroke: drawingColorEl.value,
+            left: x1,
+            top: y1,
+            originX: 'left',
+            originY: 'top',
+            radius: pointer.x-x1,
+            angle: 0,
+          });
+          if (drawingModeSelectionEl.value == 'circle' && drawingModeState)  canvas.add(circle);
+        });
+      
+        canvas.on('mouse:move', function(o){
+          if (!isMouseDown) return;
+          var pointer = canvas.getPointer(o.e);
+          let x2 = pointer.x;
+          let y2 = pointer.y;    
+          var rad = Math.max(Math.abs(y1 - y2),Math.abs(x1 - x2))/2;
+
+          var oX, oY;
+          
+          if(x1 > x2){
+            oX =  'right';
+          } else {
+            oX = 'left';
+          }
+          if(y1 > y2){
+            oY = 'bottom';
+          } else {
+            oY = 'top';
+          }
+          
+          circle.set({ 
+            radius: rad,
+            originX: oX,
+            originY: oY
+          });
+               
+          if (drawingModeSelectionEl.value == 'rectangle' && drawingModeState) canvas.renderAll(); 
+        });
+
+        canvas.on('mouse:up', function(){
+          isMouseDown = false;
+        });
+      }
+    }
+
 
     let ellipse = function() {
       if (drawingModeState == true) {
@@ -317,6 +379,9 @@ export default {
     }
     else if (drawingModeSelectionEl.value == 'ellipse') {
       ellipse();
+    }
+    else if (drawingModeSelectionEl.value == 'circle') {
+      circle();
     }
     else if (drawingModeSelectionEl.value == 'polygon') {
       polygon();
