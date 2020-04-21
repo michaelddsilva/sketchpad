@@ -22,8 +22,9 @@
             <b-form-select-option value="scribbles">Scribbles</b-form-select-option>
             <b-form-select-option value="line">Straight Lines</b-form-select-option>
             <b-form-select-option value="rectangle">Rectangles</b-form-select-option>
-            <b-form-select-option value="elipses">Elipses</b-form-select-option>
-            <b-form-select-option value="special">Special Shapes</b-form-select-option>
+            <b-form-select-option value="ellipse">Ellipses</b-form-select-option>
+            <b-form-select-option value="square">Squares</b-form-select-option>
+            <b-form-select-option value="circle">Circles</b-form-select-option>
             <b-form-select-option value="polygon">Polygons</b-form-select-option>
         </b-form-select>
         </b-form-group>
@@ -137,6 +138,105 @@ export default {
       }
     }
 
+
+    let ellipse = function() {
+      if (drawingModeState == true) {
+        console.log(drawingModeState + "Ellipse" + ";" +drawingModeSelectionEl.value);
+        canvas.isDrawingMode = false;
+        var isMouseDown;
+        var ellipse;
+        var x1, y1;
+        canvas.on('mouse:down', function(o){
+          isMouseDown = true;
+          var pointer = canvas.getPointer(o.e);
+          x1 = pointer.x;
+          y1 = pointer.y;
+          
+          ellipse = new fabric.Ellipse({
+            strokeWidth: 6,
+            fill: 'transparent',
+            stroke: drawingColorEl.value,
+            left: x1,
+            top: y1,
+            rx: pointer.x-x1,
+            ry: pointer.y-y1,
+            angle: 0,
+          });
+          if (drawingModeSelectionEl.value == 'ellipse' && drawingModeState)  canvas.add(ellipse);
+        });
+      
+        canvas.on('mouse:move', function(o){
+          if (!isMouseDown) return;
+          var pointer = canvas.getPointer(o.e);
+          let x2 = pointer.x;
+          let y2 = pointer.y;
+
+          var oX, oY;
+
+          if(x1 > x2){
+            oX =  'right';
+          } else {
+            oX = 'left';
+          }
+          if(y1 > y2){
+            oY = 'bottom';
+          } else {
+            oY = 'top';
+          }
+          
+          ellipse.set({ 
+            rx: Math.abs(x2 - x1)/2,
+            ry: Math.abs(y2 - y1)/2,
+            originX: oX,
+            originY: oY
+          });
+               
+          if (drawingModeSelectionEl.value == 'elipses' && drawingModeState) canvas.renderAll(); 
+        });
+
+        canvas.on('mouse:up', function(){
+          isMouseDown = false;
+        });
+      }
+    }
+
+    
+    let polygon = function() {
+      if (drawingModeState == true) {
+        console.log(drawingModeState + "Polygon");
+        canvas.isDrawingMode = false;
+        var isMouseDown;
+        var line;
+        canvas.on('mouse:down', function(o){
+          isMouseDown = true;
+          var pointer = canvas.getPointer(o.e);
+          var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
+          
+            line = new fabric.Line(points, {
+            strokeWidth: 6,
+            fill: drawingColorEl.value,
+            stroke: drawingColorEl.value,
+            originX: 'center',
+            originY: 'center',
+
+            });
+          if (drawingModeSelectionEl.value == 'polygon' && drawingModeState)  canvas.add(line);
+        });
+      
+        canvas.on('mouse:move', function(o){
+          if (!isMouseDown) return;
+          var pointer = canvas.getPointer(o.e);
+          
+          line.set({ x2: pointer.x, y2: pointer.y });
+          if (drawingModeSelectionEl.value == 'polygon' && drawingModeState) canvas.renderAll(); 
+        });
+
+        canvas.on('mouse:up', function(){
+          isMouseDown = false;
+        });
+      }
+    }
+
     fabric.Object.prototype.transparentCorners = false;
 
     var drawingModeEl = document.getElementById('drawing-mode');
@@ -214,6 +314,12 @@ export default {
     }
     else if (drawingModeSelectionEl.value == 'rectangle') {
       rectangle();
+    }
+    else if (drawingModeSelectionEl.value == 'ellipse') {
+      ellipse();
+    }
+    else if (drawingModeSelectionEl.value == 'polygon') {
+      polygon();
     }
   }
   }
