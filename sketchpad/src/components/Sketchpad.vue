@@ -205,15 +205,14 @@ export default {
           x1 = pointer.x;
           y1 = pointer.y;
           
-          circle = new fabric.Circle({
+          circle = new fabric.Ellipse({
             strokeWidth: 1,
             fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
             left: x1,
             top: y1,
-            originX: 'center',
-            originY: 'center',
-            radius: pointer.x-x1,
+            rx: pointer.x-x1,
+            ry: pointer.y-y1,
             angle: 0,
           });
           if (drawingModeSelectionEl.value == 'circle' && drawingModeState)  canvas.add(circle);
@@ -223,11 +222,10 @@ export default {
           if (!isMouseDown) return;
           var pointer = canvas.getPointer(o.e);
           let x2 = pointer.x;
-          let y2 = pointer.y;    
-          var rad = Math.max(Math.abs(y1 - y2),Math.abs(x1 - x2))/2;
+          let y2 = pointer.y;
 
           var oX, oY;
-          
+
           if(x1 > x2){
             oX =  'right';
           } else {
@@ -238,9 +236,19 @@ export default {
           } else {
             oY = 'top';
           }
+
+          var dim;
+
+          if (Math.max(Math.abs(x2-x1), Math.abs(y2-y1)) == (Math.abs(x2-x1))){
+            dim = x2-x1;
+          } 
+          else {
+            dim = y2-y1
+          }
           
           circle.set({ 
-            radius: rad,
+            rx: Math.abs(dim)/2,
+            ry: Math.abs(dim)/2,
             originX: oX,
             originY: oY
           });
@@ -269,8 +277,8 @@ export default {
           y1 = pointer.y;
           
           ellipse = new fabric.Ellipse({
-            strokeWidth: 6,
-            fill: 'transparent',
+            strokeWidth: 1,
+            fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
             left: x1,
             top: y1,
