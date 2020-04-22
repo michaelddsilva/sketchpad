@@ -344,7 +344,7 @@ export default {
           var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
           
             line = new Polygon(points, {
-            strokeWidth: 6,
+            strokeWidth: 1,
             fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
             originX: 'center',
@@ -363,6 +363,8 @@ export default {
         });
 
         canvas.on('mouse:up', function(){
+          canvas.selection = false;
+          setTimeout(() => canvas.selection = true, 50);
           isMouseDown = false;
         });
       }
