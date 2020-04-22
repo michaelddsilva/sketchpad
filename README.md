@@ -6,6 +6,8 @@ FabricJS was used to for the base classes for the canvas, scribble, line, ellips
 
 The implementation for the classes can be found in sketchpad\src\components\Sketchpad.vue
 
+The web app is live at: https://mdsilva6.github.io/mdsilva6-se3353-sketchpad/
+
 ## Software Engineering for Human-Computer Interface Design 
 ### Simple SketchPad Drawing Project:  Online Assignment 
 
@@ -46,6 +48,8 @@ The following itemized requirements are an informal representation of a set of a
 
 # For Pushing Latest Dist 
 
+This is here for refence for when I push an update
+
 ### For mdsilva6
 
 cd sketchpad
@@ -63,25 +67,6 @@ git commit -m "Update"
 git remote add origin-sketchpad https://github.com/mdsilva6/mdsilva6-se3353-sketchpad.git
 
 git push -u origin-sketchpad master --force
-
-cd ..
-
-
-### For michaelddsilva
-
-npm run build
-
-cd dist
-
-git init
-
-git add .
-
-git commit -m "Update"
-
-git remote add origin-sketchpad2 https://github.com/michaelddsilva/sketchpad.git
-
-git push -u origin-sketchpad2 master --force
 
 cd ..
 
