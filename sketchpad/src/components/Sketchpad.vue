@@ -42,6 +42,13 @@
 <script>
 import { fabric } from 'fabric'
 
+import {StraightLine } from '../classes/mystraightline.class'
+import {Rectangle } from '../classes/myrectangle.class'
+import {Ellipse } from '../classes/myellipse.class'
+import {Square } from '../classes/mysquare.class'
+import {Circle } from '../classes/mycircle.class'
+import {Polygon } from '../classes/mypolygon.class'
+
 export default {
   name: 'HelloWorld',
   props: {  },
@@ -68,7 +75,7 @@ export default {
           var pointer = canvas.getPointer(o.e);
           var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
           
-            line = new fabric.Line(points, {
+            line = new StraightLine(points, {
             strokeWidth: 6,
             fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
@@ -106,7 +113,7 @@ export default {
           x1 = pointer.x;
           y1 = pointer.y;
           
-          rectangle = new fabric.Rect({
+          rectangle = new Rectangle({
             strokeWidth: 1,
             fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
@@ -151,7 +158,7 @@ export default {
           x1 = pointer.x;
           y1 = pointer.y;
           
-          square = new fabric.Rect({
+          square = new Square({
             strokeWidth: 1,
             fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
@@ -205,7 +212,7 @@ export default {
           x1 = pointer.x;
           y1 = pointer.y;
           
-          circle = new fabric.Ellipse({
+          circle = new Circle({
             strokeWidth: 1,
             fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
@@ -276,7 +283,7 @@ export default {
           x1 = pointer.x;
           y1 = pointer.y;
           
-          ellipse = new fabric.Ellipse({
+          ellipse = new Ellipse({
             strokeWidth: 1,
             fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
@@ -336,7 +343,7 @@ export default {
           var pointer = canvas.getPointer(o.e);
           var points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
           
-            line = new fabric.Line(points, {
+            line = new Polygon(points, {
             strokeWidth: 6,
             fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
