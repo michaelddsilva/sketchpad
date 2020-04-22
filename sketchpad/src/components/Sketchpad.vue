@@ -4,6 +4,8 @@
       <canvas ref="canvas" width="500" height="500"></canvas>
   </b-container>
   <b-container class="controls">
+      <h1>Sketchpad Web App</h1>
+      <h2>By Michael D'Silva</h2>
       <b-button-group>
       <b-button variant="outline-primary" id="drawing-mode">Exit drawing mode</b-button><br>
       <b-button id="clear-canvas">Clear</b-button><br>
