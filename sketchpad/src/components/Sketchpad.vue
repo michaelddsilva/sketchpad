@@ -56,7 +56,7 @@ export default {
     const ref = this.$refs.canvas;
     const canvas = new fabric.Canvas(ref, { isDrawingMode: false });
 
-    let scribbles = function() {
+    let drawScribbles = function() {
       if (drawingModeState == true) {
         console.log(drawingModeState + "Scribbles");
         canvas.isDrawingMode = true;
@@ -64,7 +64,7 @@ export default {
       }
     }
 
-    let line = function() {
+    let drawLine = function() {
       if (drawingModeState == true) {
         console.log(drawingModeState + "Straight Line");
         canvas.isDrawingMode = false;
@@ -100,7 +100,7 @@ export default {
       }
     }
 
-    let rectangle = function() {
+    let drawRectangle = function() {
       if (drawingModeState == true) {
         console.log(drawingModeState + "Rectangle" + ";" +drawingModeSelectionEl.value);
         canvas.isDrawingMode = false;
@@ -145,7 +145,7 @@ export default {
       }
     }
 
-    let square = function() {
+    let drawSquare = function() {
       if (drawingModeState == true) {
         console.log(drawingModeState + "Square" + ";" +drawingModeSelectionEl.value);
         canvas.isDrawingMode = false;
@@ -199,7 +199,7 @@ export default {
       }
     }
 
-    let circle = function() {
+    let drawCircle = function() {
       if (drawingModeState == true) {
         console.log(drawingModeState + "Circle" + ";" +drawingModeSelectionEl.value);
         canvas.isDrawingMode = false;
@@ -269,8 +269,7 @@ export default {
       }
     }
 
-
-    let ellipse = function() {
+    let drawEllipse = function() {
       if (drawingModeState == true) {
         console.log(drawingModeState + "Ellipse" + ";" +drawingModeSelectionEl.value);
         canvas.isDrawingMode = false;
@@ -330,9 +329,8 @@ export default {
         });
       }
     }
-
     
-    let polygon = function() {
+    let drawPolygon = function() {
       if (drawingModeState == true) {
         console.log(drawingModeState + "Polygon");
         canvas.isDrawingMode = false;
@@ -440,25 +438,25 @@ export default {
 
     drawingModeSelectionEl.onclick = function() { 
       if (drawingModeSelectionEl.value == 'scribbles') {
-        scribbles();
+        drawScribbles();
       }
       else if (drawingModeSelectionEl.value == 'line') {
-        line();
+        drawLine();
       }
       else if (drawingModeSelectionEl.value == 'rectangle') {
-        rectangle();
+        drawRectangle();
       }
       else if (drawingModeSelectionEl.value == 'ellipse') {
-        ellipse();
+        drawEllipse();
       }
       else if (drawingModeSelectionEl.value == 'square') {
-        square();
+        drawSquare();
       }
       else if (drawingModeSelectionEl.value == 'circle') {
-        circle();
+        drawCircle();
       }
       else if (drawingModeSelectionEl.value == 'polygon') {
-        polygon();
+        drawPolygon();
       }
     }
   }
