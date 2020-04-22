@@ -9,5 +9,3 @@ My circle, ellipse, polygon, rectangle, square, and straight line classes inheri
 The canvas class has its own free-hand functionality, and so, there is no dedicated scribble class. 
 
 The implementation for the classes can be found in sketchpad\src\components\Sketchpad.vue
-
-The web app is live at: https://mdsilva6.github.io/mdsilva6-se3353-sketchpad/
