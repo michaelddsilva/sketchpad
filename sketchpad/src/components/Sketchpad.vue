@@ -211,8 +211,8 @@ export default {
             stroke: drawingColorEl.value,
             left: x1,
             top: y1,
-            originX: 'left',
-            originY: 'top',
+            originX: 'center',
+            originY: 'center',
             radius: pointer.x-x1,
             angle: 0,
           });
@@ -245,7 +245,7 @@ export default {
             originY: oY
           });
                
-          if (drawingModeSelectionEl.value == 'rectangle' && drawingModeState) canvas.renderAll(); 
+          if (drawingModeSelectionEl.value == 'circle' && drawingModeState) canvas.renderAll(); 
         });
 
         canvas.on('mouse:up', function(){
