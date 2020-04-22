@@ -107,8 +107,8 @@ export default {
           y1 = pointer.y;
           
           rectangle = new fabric.Rect({
-            strokeWidth: 6,
-            fill: 'transparent',
+            strokeWidth: 1,
+            fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
             left: x1,
             top: y1,
@@ -152,8 +152,8 @@ export default {
           y1 = pointer.y;
           
           square = new fabric.Rect({
-            strokeWidth: 6,
-            fill: 'transparent',
+            strokeWidth: 1,
+            fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
             left: x1,
             top: y1,
@@ -206,8 +206,8 @@ export default {
           y1 = pointer.y;
           
           circle = new fabric.Circle({
-            strokeWidth: 6,
-            fill: 'transparent',
+            strokeWidth: 1,
+            fill: drawingColorEl.value,
             stroke: drawingColorEl.value,
             left: x1,
             top: y1,
