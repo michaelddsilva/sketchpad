@@ -1,5 +1,11 @@
 # mdsilva6-se3353-sketchpad
 
+This sketchpad web app was implemented with FabricJS (http://fabricjs.com/)
+
+FabricJS was used to for the base classes for the canvas, scribble, line, ellipse, and rectangle classes. 
+
+The implementation for the classes can be found in sketchpad\src\components\Sketchpad.vue
+
 ## Software Engineering for Human-Computer Interface Design 
 ### Simple SketchPad Drawing Project:  Online Assignment 
 
