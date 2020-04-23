@@ -1,4 +1,4 @@
-# mdsilva6-se3353-sketchpad
+# sketchpad
 
 This sketchpad web app was implemented with FabricJS (http://fabricjs.com/)
 
