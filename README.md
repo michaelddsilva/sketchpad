@@ -12,6 +12,8 @@ The implementation for the classes can be found in sketchpad\src\components\Sket
 
 The web app is live at: https://mdsilva6.github.io/mdsilva6-se3353-sketchpad/
 
+Instructions for running this web app (if you don't wish to use the link) are in the sketchpad/ folder
+
 ## Software Engineering for Human-Computer Interface Design 
 ### Simple SketchPad Drawing Project:  Online Assignment 
 
@@ -73,8 +75,3 @@ git remote add origin-sketchpad https://github.com/mdsilva6/mdsilva6-se3353-sket
 git push -u origin-sketchpad master --force
 
 cd ..
-
-
-
-
-https://github.com/michaelddsilva/sketchpad.git
